@@ -1,0 +1,161 @@
+/* ========== إعدادات عامة ========== */
+:root{
+  /* لوحة الألوان (مستوحاة من الصورة) */
+  --teal-50:#d7fbf9;
+  --teal-100:#bfeeee;
+  --teal-200:#a6e0e1;
+  --teal-300:#8fcfd1;
+  --teal-400:#77babf;
+  --teal-500:#5ea4a9;
+  --teal-600:#4a8f93;
+  --teal-700:#3e7a7d;
+  --teal-800:#2f6668;
+  --teal-900:#0a4b4d;
+
+  --brown-100:#f7ad69;
+  --brown-200:#e79a5a;
+  --brown-300:#cf874e;
+  --brown-400:#b87745;
+  --brown-500:#9f693f;
+  --brown-600:#8a5c39;
+  --brown-700:#755134;
+  --brown-800:#63462f;
+
+  /* أساس الواجهة */
+  --bg:#f6fbfb;
+  --surface:rgba(255,255,255,.55);
+  --border:rgba(255,255,255,.25);
+  --text:#113436;
+  --muted:#47686a;
+  --primary:var(--teal-800);
+  --primary-ink:#ffffff;
+  --accent:var(--brown-500);
+  --shadow:0 8px 24px rgba(10,75,77,.12);
+  --radius:20px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: system-ui, "Segoe UI", Tahoma, Arial, "Noto Kufi Arabic", "Cairo", sans-serif;
+  background: radial-gradient(1200px 600px at 80% -10%, #c5f2f0 0%, transparent 60%) ,
+              radial-gradient(900px 500px at 10% 110%, #ffe2c4 0%, transparent 60%),
+              var(--bg);
+  color:var(--text);
+  line-height:1.75;
+}
+
+/* ========== عناصر مساعدة ========== */
+.container{width:min(1100px, 92%); margin-inline:auto}
+.section{padding:64px 0}
+.gap-lg{gap:24px}
+.grid-2{display:grid; grid-template-columns:repeat(2,1fr)}
+.grid-3{display:grid; grid-template-columns:repeat(3,1fr)}
+@media (max-width:900px){ .grid-3{grid-template-columns:1fr 1fr} }
+@media (max-width:700px){ .grid-2,.grid-3{grid-template-columns:1fr} }
+
+.glass{
+  background:var(--surface);
+  backdrop-filter:saturate(140%) blur(8px);
+  -webkit-backdrop-filter:saturate(140%) blur(8px);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  border-radius:var(--radius);
+}
+
+.card{padding:28px}
+
+.btn{
+  display:inline-block; padding:.8rem 1.2rem; border-radius:14px;
+  text-decoration:none; font-weight:700; transition:transform .15s ease, filter .2s;
+  border:1px solid transparent;
+}
+.btn:hover{transform:translateY(-2px); filter:brightness(1.05)}
+.btn-primary{background:var(--primary); color:var(--primary-ink)}
+.btn-ghost{background:transparent; border-color:var(--primary); color:var(--primary)}
+
+.muted{color:var(--muted)}
+.checklist li::marker{color:var(--accent)}
+.bullets li::marker{color:var(--primary)}
+
+.sr-only{position:absolute;inline-size:1px;block-size:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ========== الهيدر والتنقل ========== */
+.site-header{position:sticky; top:0; z-index:50; margin-top:12px}
+.nav-wrap{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:10px 14px}
+.brand{display:flex; align-items:center; gap:10px; color:var(--text); text-decoration:none; font-weight:800}
+.brand img{width:40px; height:40px}
+
+.main-nav{display:block}
+.menu{display:flex; align-items:center; gap:6px; list-style:none; margin:0; padding:0}
+.menu a, .dropdown-toggle{
+  appearance:none; border:0; background:transparent; cursor:pointer;
+  color:var(--text); text-decoration:none; font-weight:700; padding:10px 14px;
+  border-radius:12px;
+}
+.menu a.active{background:rgba(15,90,94,.08)}
+.menu a:hover, .dropdown-toggle:hover{background:rgba(15,90,94,.10)}
+
+.has-dropdown{position:relative}
+.dropdown{
+  position:absolute; inset-inline-start:0; top:calc(100% + 8px);
+  min-inline-size:220px; padding:8px; margin:0; list-style:none;
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:16px; box-shadow:var(--shadow); display:none;
+}
+.dropdown li a{display:block; padding:10px 12px; border-radius:10px}
+.dropdown li a:hover{background:rgba(15,90,94,.08)}
+
+/* بقاء القائمة مفتوحة على hover أو focus (كيبوراد) */
+.has-dropdown:hover > .dropdown,
+.has-dropdown:focus-within > .dropdown { display:block }
+
+/* إجبار الفتح لبعض الصفحات (مثلاً rooms/tajweed) */
+.dropdown[data-force-open]{display:block}
+
+/* زر الجوال */
+.nav-toggle{display:none; background:var(--surface); border:1px solid var(--border);
+  padding:.4rem .6rem; border-radius:10px; font-size:1.3rem}
+@media (max-width:900px){
+  .nav-toggle{display:block}
+  .main-nav{display:none; position:absolute; top:70px; inset-inline:4%; background:var(--surface);
+    border:1px solid var(--border); border-radius:16px; padding:8px}
+  .main-nav.open{display:block}
+  .menu{flex-direction:column; align-items:stretch}
+  .has-dropdown > .dropdown{position:static; display:none; padding:6px}
+  .has-dropdown.open > .dropdown{display:block}
+}
+
+/* ========== البطل (Hero) ========== */
+.hero{padding:80px 0}
+.hero-content{padding:28px; text-align:center}
+.hero h1{margin:0 0 12px; font-size:clamp(28px, 4vw, 42px)}
+.hero p{margin:0 auto 20px; max-width:60ch}
+.hero-actions{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
+
+/* ========== أقسام عامة ========== */
+.page-header h1{margin-bottom:10px}
+.cta{text-align:center; padding:32px}
+.rooms-grid{
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-top:18px
+}
+@media (max-width:900px){ .rooms-grid{grid-template-columns:1fr 1fr} }
+@media (max-width:600px){ .rooms-grid{grid-template-columns:1fr} }
+
+.room-card{padding:22px; display:flex; flex-direction:column; gap:10px}
+
+/* ========== الفوتر ========== */
+.site-footer{padding:40px 0; color:var(--muted); text-align:center}
+
+/* ========== أنيميشن ظهور ========== */
+.fade-up{opacity:0; transform:translateY(12px); animation:fadeUp .6s ease .05s forwards}
+@keyframes fadeUp{
+  to{opacity:1; transform:none}
+}
+
+/* تهيئة حواف التركيز للوصولية */
+:focus-visible{outline:3px solid var(--brown-300); outline-offset:2px}
+
+/* كرت التواصل */
+.contact-card .email a{font-weight:800; color:var(--primary); font-size:1.1rem}
